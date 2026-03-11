@@ -8,7 +8,6 @@ pipeline {
             steps {
                 script{
                     buildApp()
-                    npm install
                 }
             }
         }
@@ -59,6 +58,7 @@ pipeline {
 
 def buildApp() {
     echo "Installing all necessary node dependencies.."
+    sh "npm install"
 }
 
 def deploy(String environment) {
