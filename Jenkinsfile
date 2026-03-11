@@ -8,6 +8,7 @@ pipeline {
             steps {
                 script{
                     buildApp()
+                    npm install
                 }
             }
         }
