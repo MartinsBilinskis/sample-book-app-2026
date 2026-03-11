@@ -58,7 +58,7 @@ pipeline {
 
 def buildApp() {
     echo "Installing all necessary node dependencies.."
-    cmd "npm install"
+    pwsh "npm install"
 }
 
 def deploy(String environment) {
