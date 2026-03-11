@@ -21,7 +21,7 @@ pipeline {
         stage('test-dev') {
             steps {
                 script{
-                    deploy("DEV")
+                    test("DEV")
                 }
             }
         }
@@ -35,7 +35,7 @@ pipeline {
         stage('test-stg') {
             steps {
                 script{
-                    deploy("STG")
+                    test("STG")
                 }
             }
         }
@@ -49,7 +49,7 @@ pipeline {
         stage('test-prd') {
             steps {
                 script{
-                    deploy("PROD")
+                    test("PROD")
                 }
             }
         }
@@ -65,7 +65,7 @@ def deploy(String environment) {
     echo "Deployment to ${environment} environment finished.."
 }
 
-def deploy(String environment) {
+def test(String environment) {
     echo "Testing Sample Book Application service has started on ${environment} environment.."
     echo "Testing Sample Book Application service finished.."
 }
