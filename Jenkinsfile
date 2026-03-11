@@ -7,7 +7,7 @@ pipeline {
         stage('build-install-deps') {
             steps {
                 script{
-                    build()
+                    buildApp()
                 }
             }
         }
@@ -56,7 +56,7 @@ pipeline {
     }
 }
 
-def build() {
+def buildApp() {
     echo "Installing all necessary node dependencies.."
 }
 
