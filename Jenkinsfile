@@ -74,5 +74,7 @@ def deploy(String environment, int port) {
 def test(String environment) {
     echo "Testing Sample Book Application service has started on ${environment} environment.."
     git branch: 'main', poll: false, url: 'https://github.com/MartinsBilinskis/RTU-sample-API-automation-2026-CI-DI.git'
+    pwsh "npm install"
+    pwsh "npm run books BOOKS_${environment}"
     echo "Testing Sample Book Application service finished.."
 }
