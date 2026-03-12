@@ -64,7 +64,7 @@ def buildApp() {
 def deploy(String environment, int port) {
     echo "Deployment to ${environment} environment has started.."
     pwsh "ls"
-    pwsh "pm2 start -n \"books-${environment}\" index.js -- -- ${port}"
+    bat "pm2 start -n \"books-${environment}\" index.js -- -- ${port}"
     echo "Deployment to ${environment} environment finished.."
 }
 
