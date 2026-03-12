@@ -63,6 +63,7 @@ def buildApp() {
 
 def deploy(String environment) {
     echo "Deployment to ${environment} environment has started.."
+    pwsh "ls"
     echo "Deployment to ${environment} environment finished.."
 }
 
