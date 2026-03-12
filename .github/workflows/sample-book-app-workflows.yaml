@@ -17,7 +17,7 @@ jobs:
     steps:
       - uses: actions/checkout@v6
       - name: Print step name
-        run: echo "echo "Deployment to DEV environment has started.."
+        run: echo echo "Deployment to DEV environment has started.."
   test-dev:
     runs-on: ubuntu-latest
     steps:
