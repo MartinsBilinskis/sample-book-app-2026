@@ -59,6 +59,7 @@ pipeline {
 def buildApp() {
     echo "Installing all necessary node dependencies.."
     pwsh "npm install"
+    echo "Dependency installation successful."
 }
 
 def deploy(String environment, int port) {
