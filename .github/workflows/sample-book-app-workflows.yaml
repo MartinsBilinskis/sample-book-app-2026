@@ -24,9 +24,9 @@ jobs:
       - name: Install dependencies
         run: npm install
       - name: Cleanup of old running services
-        run:  & ".\node_modules\.bin\pm2.cmd" delete "books-$environment"; if ($LASTEXITCODE -ne 0) { exit 0 }
+        run:  '& ".\node_modules\.bin\pm2.cmd" delete "books-dev"; if ($LASTEXITCODE -ne 0) { exit 0 }'
       - name: Run Service
-        run:  .\\node_modules\\.bin\\pm2 start -n \"books-dev\" index.js -- -- 1010
+        run:  .\node_modules\.bin\pm2.cmd start index.js --name "books-dev" -- -- 1010
 
   test-dev:
     runs-on: self-hosted
