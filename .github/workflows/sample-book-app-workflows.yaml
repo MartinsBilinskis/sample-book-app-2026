@@ -10,10 +10,8 @@ jobs:
     runs-on: self-hosted
     steps:
       - uses: actions/checkout@v6
-      - run: echo "Installing all necessary node dependencies.."
-      - name: Install all dependencies
-        run: npm install
-      - run: echo "Dependency installation successful."
+      - uses: ./.github/actions/build
+
   deploy-dev:
     runs-on: self-hosted
     needs: build-install-deps
@@ -29,6 +27,9 @@ jobs:
     needs: deploy-dev
     steps:
       - uses: actions/checkout@v6
+        with:
+          repository: 'MartinsBilinskis/RTU-sample-API-automation-2026-CI-DI'
+          clean: 'false'
       - uses: ./.github/actions/test
         with:
           environment: 'DEV'
@@ -45,6 +46,10 @@ jobs:
     runs-on: self-hosted
     needs: deploy-stg
     steps:
+      - uses: actions/checkout@v6
+        with:
+          repository: 'MartinsBilinskis/RTU-sample-API-automation-2026-CI-DI'
+          clean: 'false'
       - uses: ./.github/actions/test
         with:
           environment: 'DEV'
@@ -61,6 +66,10 @@ jobs:
     runs-on: self-hosted
     needs: deploy-prd
     steps:
+      - uses: actions/checkout@v6
+        with:
+          repository: 'MartinsBilinskis/RTU-sample-API-automation-2026-CI-DI'
+          clean: 'false'
       - uses: ./.github/actions/test
         with:
           environment: 'DEV'
