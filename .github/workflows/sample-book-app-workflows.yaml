@@ -17,7 +17,7 @@ jobs:
     runs-on: self-hosted
     needs: build-install-deps
     steps:
-      - uses: .github/actions/deploy
+      - uses: ./.github/actions/deploy
         with:
           environment: 'DEV'
           port: '1010'
@@ -32,7 +32,7 @@ jobs:
     runs-on: self-hosted
     needs: test-dev
     steps:
-      - uses: .github/actions/deploy
+      - uses: ./.github/actions/deploy
         with:
           environment: 'STG'
           port: '2020'
@@ -47,7 +47,7 @@ jobs:
     runs-on: self-hosted
     needs: test-stg
     steps:
-      - uses: .github/actions/deploy
+      - uses: ./.github/actions/deploy
         with:
           environment: 'PROD'
           port: '3030'
