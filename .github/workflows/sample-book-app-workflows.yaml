@@ -9,7 +9,6 @@ jobs:
   build-install-deps:
     runs-on: self-hosted
     steps:
-      - uses: actions/checkout@v6
       - run: echo "Installing all necessary node dependencies.."
       - name: Install all dependencies
         run: npm install
@@ -18,7 +17,6 @@ jobs:
     runs-on: self-hosted
     needs: build-install-deps
     steps:
-      - uses: actions/checkout@v6
       - name: Print step name
         run: echo "Deployment to DEV environment has started.."
       - name: Install dependencies
@@ -32,34 +30,37 @@ jobs:
     runs-on: self-hosted
     needs: deploy-dev
     steps:
-      - uses: actions/checkout@v6
       - name: Print step name
         run: echo "Installing all necessary node dependencies.."
   deploy-stg:
     runs-on: self-hosted
     needs: test-dev
     steps:
-      - uses: actions/checkout@v6
       - name: Print step name
         run: echo "Installing all necessary node dependencies.."
+      - name: Cleanup of old running services
+        run: '& ".\node_modules\.bin\pm2.cmd" delete "books-STG"; if ($LASTEXITCODE -ne 0) { exit 0 }'
+      - name: Run Service
+        run: .\node_modules\.bin\pm2.cmd start index.js --name "books-STG" -- -- 1010
   test-stg:
     runs-on: self-hosted
     needs: deploy-stg
     steps:
-      - uses: actions/checkout@v6
       - name: Print step name
         run: echo "Installing all necessary node dependencies.."
   deploy-prd:
     runs-on: self-hosted
     needs: test-stg
     steps:
-      - uses: actions/checkout@v6
       - name: Print step name
         run: echo "Installing all necessary node dependencies.."
+      - name: Cleanup of old running services
+        run: '& ".\node_modules\.bin\pm2.cmd" delete "books-PROD"; if ($LASTEXITCODE -ne 0) { exit 0 }'
+      - name: Run Service
+        run: .\node_modules\.bin\pm2.cmd start index.js --name "books-PROD" -- -- 1010
   test-prd:
     runs-on: self-hosted
     needs: deploy-prd
     steps:
-      - uses: actions/checkout@v6
       - name: Print step name
         run: echo "Installing all necessary node dependencies.."
