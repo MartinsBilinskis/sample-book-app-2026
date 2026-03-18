@@ -16,11 +16,11 @@ runs:
       run: echo "Testing Sample Book Application service has started on ${{inputs.environment}} environment.."
       shell: pwsh
     - name: Install dependencies
-      working-directory: ./e2e-api-test
+      working-directory: e2e-api-tests
       run: npm install
       shell: pwsh
     - name: Run API tests
-      working-directory: ./e2e-api-tests
+      working-directory: e2e-api-tests
       run: npm run books BOOKS_${{inputs.environment}}
       shell: pwsh
 
