@@ -1,12 +1,15 @@
-name: 'Build'
-description: 'Build sample'
+name: 'Build Application/Service'
+description: 'Build Sample Book App service'
 runs:
   using: composite
   steps:
     - run: echo "Installing all necessary node dependencies.."
-    - name: Install all dependencies
+      shell: pwsh
+    - name: Install dependecies
       run: npm install
-    - run: echo "Dependency installation successful."
+      shell: pwsh
+    - run: echo "Dependecies successfully installed.."
+      shell: pwsh
 
 
 
