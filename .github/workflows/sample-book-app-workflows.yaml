@@ -9,6 +9,7 @@ jobs:
   build-install-deps:
     runs-on: self-hosted
     steps:
+      - uses: actions/checkout@v6
       - run: echo "Installing all necessary node dependencies.."
       - name: Install all dependencies
         run: npm install
