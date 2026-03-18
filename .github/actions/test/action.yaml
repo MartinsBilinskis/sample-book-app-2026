@@ -1,0 +1,30 @@
+name: 'Run API test'
+description: 'Run action test for sample book'
+inputs:
+  environment:
+    description: 'Environment where to deploy Sample book'
+    required: true
+runs:
+  using: composite
+  steps:
+    - uses: actions/checkout@v6
+      with:
+        repository: 'MartinsBilinskis/RTU-sample-API-automation-2026-CI-DI'
+    - name: Print step name
+      run: echo "Testing Sample Book Application service has started on ${{inputs.environment}} environment.."
+      shell: pwsh
+    - name: Install dependencies
+      run: npm install
+      shell: pwsh
+    - name: Run API tests
+      run: npm run books BOOKS_${{inputs.environment}}
+      shell: pwsh
+
+
+
+#      echo "Testing Sample Book Application service has started on ${environment} environment.."
+#      git branch: 'main', poll:
+#                            false, url: 'https://github.com/MartinsBilinskis/RTU-sample-API-automation-2026-CI-DI.git'
+#      pwsh "npm install"
+#      pwsh "npm run books BOOKS_${environment}"
+#      echo "Testing Sample Book Application service finished.."
