@@ -1,0 +1,21 @@
+name: 'Deploy application/service'
+description: 'Deploy sample book via pm2'
+inputs:
+  environment:
+    description: 'Environment where to deploy Sample book'
+    required: true
+  port:
+    description: 'Port where to deploy Sample book'
+    required: true
+runs:
+  using: composite
+  steps:
+    - name: Print step name
+      run: echo "Installing all necessary node dependencies.."
+      shell: pwsh
+    - name: Cleanup of old running services
+      run: '& ".\node_modules\.bin\pm2" delete "books-${{inputs.environment}}"; if ($LASTEXITCODE -ne 0) { exit 0 }'
+      shell: pwsh
+    - name: Run Service
+      run: .\node_modules\.bin\pm2 start index.js --name "books-${{inputs.environment}}" -- -- ${{inputs.port}}
+      shell: pwsh
