@@ -15,7 +15,7 @@ runs:
       run: echo "Installing all necessary node dependencies.."
       shell: pwsh
     - name: Cleanup of old running services
-      run: '& ".\node_modules\.bin\pm2" delete "books-${{inputs.environment}}"; if ($LASTEXITCODE -ne 0) { exit 0 }'
+      run: '& ".\node_modules\.bin\pm2.cmd" delete "books-${{inputs.environment}}"; if ($LASTEXITCODE -ne 0) { exit 0 }'
       shell: pwsh
     - name: Run Service
       run: .\node_modules\.bin\pm2 start index.js --name "books-${{inputs.environment}}" -- -- ${{inputs.port}}
