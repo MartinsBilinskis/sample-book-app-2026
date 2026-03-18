@@ -24,7 +24,7 @@ jobs:
       - name: Install dependencies
         run: npm install
       - name: Cleanup of old running services
-        run:  .\\node_modules\\.bin\\pm2 delete \"books-dev\" || exit 0
+        run:  .\\node_modules\\.bin\\pm2 delete \"books-dev\"
       - name: Run Service
         run:  .\\node_modules\\.bin\\pm2 start -n \"books-dev\" index.js -- -- 1010
 
