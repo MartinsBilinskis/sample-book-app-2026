@@ -27,6 +27,7 @@ jobs:
     runs-on: self-hosted
     needs: deploy-dev
     steps:
+      - uses: actions/checkout@v6
       - name: Print step name
         run: echo "Installing all necessary node dependencies.."
   deploy-stg:
@@ -42,6 +43,7 @@ jobs:
     runs-on: self-hosted
     needs: deploy-stg
     steps:
+      - uses: actions/checkout@v6
       - name: Print step name
         run: echo "Installing all necessary node dependencies.."
   deploy-prd:
