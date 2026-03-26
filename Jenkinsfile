@@ -78,8 +78,8 @@ def test(String environment) {
     pwsh "docker pull mabbler/api-tests:latest"
     def directory = pwd()
     pwsh "echo '${directory}'"
-    pwsh "docker run --rm --network sample-book-app-compose-network -v ${directory}\\test-reports\\dev:\\api-tests\\mochawesome-report mtararujs/api-tests books BOOKS_${environment}"
-
+    pwsh "docker run --rm --network sample-book-app-compose-network -v ${directory}\\test-reports\\dev:\\api-tests\\mochawesome-report mabbler/api-tests books BOOKS_${environment}"
+    archiveArtifacts allowEmptyArchive: true, artifacts: 'mochawesome.json', followSymlinks: false
     pwsh "ls"
     echo "Testing Sample Book Application service finished.."
 }
