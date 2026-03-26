@@ -76,7 +76,10 @@ def deploy(String environment) {
 def test(String environment) {
     echo "Testing Sample Book Application service has started on ${environment} environment.."
     pwsh "docker pull mabbler/api-tests:latest"
+    def directory = pwd()
+    pwsh "echo '${directory}'"
     pwsh "docker run --rm --network sample-book-app-compose-network -v ${PWD}/test-reports/dev:/api-tests/mochawesome-report mtararujs/api-tests books BOOKS_${environment}"
+
     pwsh "ls"
     echo "Testing Sample Book Application service finished.."
 }
