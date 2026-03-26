@@ -67,9 +67,9 @@ def buildApp() {
 def deploy(String environment) {
     echo "Deployment to ${environment} environment has started.."
     pwsh "docker pull mabbler/sample-book-app:${BUILD_NUMBER}"
-    pwsh "docker composer stop sample-book-app-${environment}"
-    pwsh "docker composer rm sample-book-app-${environment}"
-    pwsh "docker composer up -d sample-book-app-${environment}"
+    pwsh "docker compose stop sample-book-app-${environment}"
+    pwsh "docker compose rm sample-book-app-${environment}"
+    pwsh "docker compose up -d sample-book-app-${environment}"
     echo "Deployment to ${environment} environment finished.."
 }
 
