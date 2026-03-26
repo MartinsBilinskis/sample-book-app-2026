@@ -14,7 +14,7 @@ pipeline {
         stage('deploy-dev') {
             steps {
                 script{
-                    deploy("DEV", 1010)
+                    deploy("dev")
                 }
             }
         }
@@ -28,7 +28,7 @@ pipeline {
         stage('deploy-stg') {
             steps {
                 script{
-                    deploy("STG", 2020)
+                    deploy("stg")
                 }
             }
         }
@@ -42,7 +42,7 @@ pipeline {
         stage('deploy-prd') {
             steps {
                 script{
-                    deploy("PROD", 3030)
+                    deploy("prod")
                 }
             }
         }
@@ -64,14 +64,13 @@ def buildApp() {
     pwsh "docker push mabbler/sample-book-app:${BUILD_NUMBER}"
 }
 
-def deploy(String environment, int port) {
-//     echo "Deployment to ${environment} environment has started.."
-//     git branch: 'main', poll: true, url: 'https://github.com/MartinsBilinskis/sample-book-app-2026.git'
-//     pwsh "npm install"
-//     pwsh "ls"
-//     bat ".\\node_modules\\.bin\\pm2 delete \"books-${environment}\" || exit 0"
-//     pwsh ".\\node_modules\\.bin\\pm2 start -n \"books-${environment}\" index.js -- -- ${port}"
-//     echo "Deployment to ${environment} environment finished.."
+def deploy(String environment) {
+    echo "Deployment to ${environment} environment has started.."
+    pwsh "docker pull mabbler/sample-book-app:${BUILD_NUMBER}"
+    pwsh "docker composer stop sample-book-app-${environment}"
+    pwsh "docker composer rm sample-book-app-${environment}"
+    pwsh "docker composer up -d sample-book-app-${environment}"
+    echo "Deployment to ${environment} environment finished.."
 }
 
 def test(String environment) {
